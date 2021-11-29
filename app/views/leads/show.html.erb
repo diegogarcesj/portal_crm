@@ -1,0 +1,24 @@
+<h2>Conversaciones con <%= "#{@lead.first_name} #{@lead.last_name}" %> <small class="text-muted">(<%= @lead.status.capitalize %>)</small></h2>
+
+
+<div class="row">
+  <div class="col-8">
+    <% if @conversations.count == 0 %>
+      <p>No hay conversaciones para este prospecto a&uacute;n.</p>
+    <% else %>
+      <% @conversations.each do |conversation| %>
+        <p><strong><%= conversation.created_at.strftime("%d/%m/%Y")   %></strong></p>
+        <p><%= conversation.content %></p>
+        <hr>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="col-4">
+    <h4>Agregar conversaci&oacute;n</h4>
+    <%= simple_form_for [@lead, @conversation] do |f| %>
+      <%= f.input :content, label: "Detalles", :input_html => {:rows => 10} %>
+      <%= f.submit "Subir información", class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="d-flex align-items-center">
+  <h2>Prospectos | </h2>
+  <%= link_to new_lead_path do %>
+    <h4 class="ml-2">Ingresar nuevo prospecto</h4>
+  <% end %>
+</div>
+
+
+<div class="row my-5 mx-0">
+  <div class="col-4 border text-center p-5">
+    <h1><%= @num_leads %></h1>
+    <h6>Prospectos</h6>
+  </div>
+
+  <div class="col-4 border text-center p-5">
+    <h1><%= @num_interested %></h1>
+    <h6>Interesados</h6>
+  </div>
+
+  <div class="col-4 border text-center p-5">
+    <h1><%= @num_customers %></h1>
+    <h6>Clientes</h6>
+  </div>
+</div>
+
+
+<table class="table table-striped mx-0">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Email</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Tel&eacute;fono</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Ingresado por</th>
+      <th scope="col">Fecha ingreso</th>
+      <th scope="col">Conversa- ciones</th>
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @leads.each do |lead| %>
+    <tr>
+      <td><%= lead.email %></td>
+      <td><%= "#{lead.first_name} #{lead.last_name}" %></td>
+      <td><%= lead.phone %></td>
+      <td><%= lead.status.capitalize %></td>
+      <td><%= lead.user.email %></td>
+      <td><%= lead.created_at.strftime("%d/%m/%Y") %></td>
+      <td><%= lead.conversations.count %></td>
+      <td><%= link_to 'Ver', lead_path(lead) %> | <%= link_to 'Editar', edit_lead_path(lead) %> |
+      <%= link_to "Eliminar", lead_path(lead), data: { confirm: "¿Confirmas la eliminación?" }, method: :delete %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

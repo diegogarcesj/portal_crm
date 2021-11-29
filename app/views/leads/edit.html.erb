@@ -1,0 +1,13 @@
+<div class="row justify-content-center">
+  <div class="col-6">
+    <h2>Editar prospecto</h2>
+    <%= simple_form_for @lead do |f| %>
+      <%= f.input :first_name, label: "Nombre" %>
+      <%= f.input :last_name, label: "Apellido" %>
+      <%= f.input :email, label: "Correo electrónico" %>
+      <%= f.input :phone, label: "Teléfono" %>
+      <%= f.input :status, collection: Lead.statuses, label: "Estado" %>
+      <%= f.submit "Actualizar", class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
